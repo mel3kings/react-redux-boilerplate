@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import ReposList from 'components/ReposList';
 import './style.scss';
+import Basic from '../../components/Formik/Forms';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -39,6 +40,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         </Helmet>
         <div className="home-page">
           <section className="centered">
+            <Basic/>
             <h2>Start your next react project in seconds</h2>
             <p>
               A minimal <i>React-Redux</i> boilerplate with all the best practices
