@@ -7,7 +7,14 @@ const makeSelectUsername = () => createSelector(
   (homeState) => homeState.username
 );
 
+
+const makeSelectLast = () => createSelector(
+  selectHome,
+  (homeState) => homeState.last
+);
+
 export {
   selectHome,
+  makeSelectLast,
   makeSelectUsername,
 };

@@ -24,19 +24,19 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
   render() {
     const {
-      loading, error, repos, username, onChangeUsername, onSubmitForm
+      loading, error, repos, username, onChangeUsername, onSubmitForm, last, savednames,
     } = this.props;
     const reposListProps = {
       loading,
       error,
-      repos
+      repos,
     };
 
     return (
       <article>
         <Helmet>
           <title>Home Page</title>
-          <meta name="description" content="A React.js Boilerplate application homepage" />
+          <meta name="description" content="A React.js Boilerplate application homepage"/>
         </Helmet>
         <div className="home-page">
           <section className="centered">
@@ -61,6 +61,13 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                 />
               </label>
             </form>
+            last saved:
+            {last}
+            <ul>
+              {savednames && savednames.map((item) => (
+                <li key={item.id}>{item}</li>
+              ))}
+            </ul>
             <ReposList {...reposListProps} />
           </section>
         </div>
@@ -75,5 +82,7 @@ HomePage.propTypes = {
   repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   username: PropTypes.string,
-  onChangeUsername: PropTypes.func
+  last: PropTypes.string,
+  savednames: PropTypes.array,
+  onChangeUsername: PropTypes.func,
 };

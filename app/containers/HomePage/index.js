@@ -6,11 +6,15 @@ import injectSaga from 'utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
-  makeSelectError
+  makeSelectError,
+  makeSelectSavedNames
 } from 'containers/App/selectors';
 import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+import {
+  makeSelectUsername,
+  makeSelectLast,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import HomePage from './HomePage';
@@ -20,20 +24,28 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmitForm: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadRepos());
-  }
+  },
 });
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
   username: makeSelectUsername(),
   loading: makeSelectLoading(),
-  error: makeSelectError()
+  error: makeSelectError(),
+  last: makeSelectLast(),
+  savednames: makeSelectSavedNames(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'home', reducer });
-const withSaga = injectSaga({ key: 'home', saga });
+const withReducer = injectReducer({
+  key: 'home',
+  reducer,
+});
+const withSaga = injectSaga({
+  key: 'home',
+  saga,
+});
 
 export default compose(withReducer, withSaga, withConnect)(HomePage);
 export { mapDispatchToProps };

@@ -1,4 +1,4 @@
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
+import { LOAD_REPOS, LOAD_REPOS_ERROR, LOAD_REPOS_SUCCESS } from './constants';
 
 // The initial state of the App
 export const initialState = {
@@ -8,12 +8,13 @@ export const initialState = {
   userData: {
     repositories: false,
   },
+  savednames: [],
 };
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_REPOS: {
-      const newState = {
+      return {
         ...state,
         loading: true,
         error: false,
@@ -21,19 +22,17 @@ function appReducer(state = initialState, action) {
           repositories: false,
         },
       };
-
-      return newState;
     }
     case LOAD_REPOS_SUCCESS: {
-      const newState = {
+      return {
         ...state,
         loading: false,
         userData: {
           repositories: action.repos,
         },
         currentUser: action.username,
+        savednames: [...state.savednames, (action.username)]
       };
-      return newState;
     }
 
     case LOAD_REPOS_ERROR: {

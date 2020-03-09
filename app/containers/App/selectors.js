@@ -30,6 +30,12 @@ const makeSelectLocation = () => createSelector(
   (routeState) => routeState.location
 );
 
+
+const makeSelectSavedNames = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.savednames
+);
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -37,4 +43,5 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocation,
+  makeSelectSavedNames
 };
